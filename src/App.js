@@ -9,7 +9,7 @@ import Home from "./pages/Home/Home.page";
 function App() {
    return (
       <BrowserRouter>
-         <Container>
+         <Container fluid="md">
             <Row>
                <Col>
                   <HeaderNavBar></HeaderNavBar>
@@ -18,9 +18,9 @@ function App() {
             <Row>
                <Col>
                   <Switch>
-                     <Route path="/Home" component={Home} />
-                     <Route path="/Posts" component={Posts} />
-                     <Redirect from="/" to="/Home"></Redirect>
+                     <Route path="/home" component={Home} />
+                     <Route path="/posts" component={Posts} />
+                     <Redirect from="/" to="/home"></Redirect>
                   </Switch>
                </Col>
             </Row>

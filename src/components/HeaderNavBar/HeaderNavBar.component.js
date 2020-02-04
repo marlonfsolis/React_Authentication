@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {Navbar, Nav} from 'react-bootstrap';
+import {NavLink} from 'react-router-dom'
 
 export default class HeaderNavBar extends Component {
    render() {
@@ -10,8 +11,8 @@ export default class HeaderNavBar extends Component {
                <Navbar.Toggle aria-controls="basic-navbar-nav" />
                <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="mr-auto">
-                     <Nav.Link href="/home">Home</Nav.Link>
-                     <Nav.Link href="/Posts">Posts</Nav.Link>
+                     <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
+                     <Nav.Link  as={NavLink} to="/posts">Posts</Nav.Link>
                   </Nav>
                </Navbar.Collapse>
             </Navbar>
