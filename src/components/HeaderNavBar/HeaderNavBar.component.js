@@ -12,7 +12,8 @@ export default class HeaderNavBar extends Component {
                <Navbar.Collapse id="basic-navbar-nav">
                   <Nav className="mr-auto">
                      <Nav.Link as={NavLink} to="/home">Home</Nav.Link>
-                     <Nav.Link  as={NavLink} to="/posts">Posts</Nav.Link>
+                     <Nav.Link  as={NavLink} to="/posts" exact>Posts</Nav.Link>
+                     <Nav.Link  as={NavLink} to="/posts/0">New Post</Nav.Link>
                   </Nav>
                </Navbar.Collapse>
             </Navbar>
