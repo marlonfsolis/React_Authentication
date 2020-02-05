@@ -1,28 +1,37 @@
-import React, { Component } from 'react'
-import { Row, Col, Form } from 'react-bootstrap'
+import React, { Component } from "react";
+import { Row, Col } from "react-bootstrap";
+import "./PostDetail.page.css";
+import PostDetailForm from "../../../components/PostDetailForm/PostDetailForm.component";
+import * as postsService from '../../../services/Posts.service';
 
 export default class PostDetail extends Component {
-    render() {
-        return (
-            <div>
-                <Row>
-                    <Col md={3}></Col>
-                    <Col md={6}>
-                        <h2>Create new Posts</h2>
-                        <Form>
-                            <Form.Group>
-                                <Form.Label>Title</Form.Label>
-                                <Form.Control type="text"></Form.Control>
-                            </Form.Group>
-                            <Form.Group>
-                                <Form.Label>Content</Form.Label>
-                                <Form.Control as="textarea" rows="3"></Form.Control>
-                            </Form.Group>
-                        </Form>
-                    </Col>
-                    <Col md={3}></Col>
-                </Row>
-            </div>
-        )
+    constructor(props) {
+        super(props);
+
+        this.onAddPost = this.onAddPost.bind(this);
     }
+
+   onAddPost(post) {
+      console.log(post);
+      postsService.savePost(post).then(res => {
+          console.log('saved post');
+      });
+   }
+
+   render() {
+      return (
+         <div>
+            <Row>
+               <Col md={3}></Col>
+               <Col md={6}>
+                  <div className="page-title">
+                     <h2>Create new Posts</h2>
+                  </div>
+                  <PostDetailForm onAddPost={this.onAddPost}></PostDetailForm>
+               </Col>
+               <Col md={3}></Col>
+            </Row>
+         </div>
+      );
+   }
 }

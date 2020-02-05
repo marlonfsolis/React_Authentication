@@ -1,7 +1,7 @@
 import * as actionTypes from '../actionTypes';
 
 
-export const storePosts = (payload) => ({
+export const storePosts = (posts) => ({
     type: actionTypes.STORE_POSTS,
-    payload
+    posts
 });
