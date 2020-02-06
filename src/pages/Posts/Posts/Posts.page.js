@@ -5,7 +5,7 @@ import { storePosts } from "../../../store/actions/posts.action";
 import * as postsService from "../../../services/Posts.service";
 import PostCard from "../../../components/PostCard/PostCard.component";
 import { Row, Col } from "react-bootstrap";
-import './Posts.page.css';
+import "./Posts.page.css";
 
 class Posts extends Component {
    static propTypes = {
@@ -29,28 +29,30 @@ class Posts extends Component {
          );
       }
       return (
-         <div>
+         <Row>
             {posts.map(p => {
-               return <PostCard key={p.key} title={p.title} content={p.content}></PostCard>;
+               return (
+                  <Col key={p.key}>
+                     <PostCard title={p.title} content={p.content}></PostCard>
+                  </Col>
+               );
             })}
-         </div>
+         </Row>
       );
    }
 
    render() {
       return (
-         <div>
-            <Row>
-               <Col md={2}></Col>
-               <Col md={8}>
-                  <div className="page-title">
-                     <h2>Post List</h2>
-                  </div>
-                  <div className="card-list">{this.getPostCards()}</div>
-               </Col>
-               <Col md={2}></Col>
-            </Row>
-         </div>
+         <Row>
+            <Col md={1}></Col>
+            <Col md={8}>
+               <div>
+                  <h2>Post List</h2>
+               </div>
+               <section name="cards">{this.getPostCards()}</section>
+            </Col>
+            <Col md={1}></Col>
+         </Row>
       );
    }
 }
