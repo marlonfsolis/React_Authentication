@@ -8,14 +8,38 @@ export default class PostDetail extends Component {
     constructor(props) {
         super(props);
 
-        this.onAddPost = this.onAddPost.bind(this);
+        this.state = {
+            isEditMode: true,
+            title: 'Create new Posts',
+            post: {
+               title: '',
+               content: ''
+            }
+        };
+
+        this.onAddPost = this.onSavePost.bind(this);
     }
 
-   onAddPost(post) {
-      console.log(post);
-      postsService.savePost(post).then(res => {
-          console.log('saved post');
-      });
+    componentDidMount() {
+      const id = this.props.match.params.id || '';
+      console.log(id)
+      if(id !== '' && id !== 'new') {
+         this.setState({
+            isEditMode: true,
+            title: 'Update this post'
+         });
+
+         postsService.getPost(id).then(post => {
+            this.setState({post: post});
+         });
+      }
+      
+    }
+
+   onSavePost(post) {
+      postsService.savePost(post, this.state.isEditMode).then(res => {
+         console.log('saved post');
+     });
    }
 
    render() {
@@ -25,9 +49,9 @@ export default class PostDetail extends Component {
                <Col md={3}></Col>
                <Col md={6}>
                   <div className="page-title">
-                     <h2>Create new Posts</h2>
+                     <h2>{this.state.title}</h2>
                   </div>
-                  <PostDetailForm onAddPost={this.onAddPost}></PostDetailForm>
+                  <PostDetailForm post={this.state.post} onSavePost={this.onAddPost}></PostDetailForm>
                </Col>
                <Col md={3}></Col>
             </Row>

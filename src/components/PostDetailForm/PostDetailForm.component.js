@@ -3,11 +3,14 @@ import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 
 export default function PostDetailForm(props) {
-    const { register, handleSubmit } = useForm();
+   const { register, handleSubmit, setValue } = useForm({
+      title: props.post.title,
+      content: props.post.content
+   });
 
-    const onAddPost = (post) => {
-        props.onAddPost(post);
-    };
+   const onAddPost = post => {
+      props.onAddPost(post);
+   };
 
    return (
       <div>
