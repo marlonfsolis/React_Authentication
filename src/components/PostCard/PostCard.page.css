@@ -10,6 +10,10 @@
     cursor: pointer;
 }
 
+.Post:hover {
+    background-color: orange;
+}
+
 .Post .card-text {
     text-align: left;
     text-overflow: clip;
