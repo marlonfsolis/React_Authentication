@@ -5,41 +5,64 @@ import PostDetailForm from "../../../components/PostDetailForm/PostDetailForm.co
 import * as postsService from '../../../services/Posts.service';
 
 export default class PostDetail extends Component {
-    constructor(props) {
-        super(props);
+   constructor(props) {
+      super(props);
 
-        this.state = {
-            isEditMode: true,
-            title: 'Create new Posts',
-            post: {
-               title: '',
-               content: ''
-            }
-        };
+      this.state = this.getInitState();
 
-        this.onAddPost = this.onSavePost.bind(this);
-    }
+      this.onAddPost = this.onSavePost.bind(this);
+   }
 
-    componentDidMount() {
+   getInitState() {
+      return {
+         currentId: '',
+         isEditMode: false,
+         title: 'Create new Posts',
+         post: {
+            title: '',
+            content: ''
+         }
+      };
+   }
+
+   getPost() {
       const id = this.props.match.params.id || '';
-      console.log(id)
-      if(id !== '' && id !== 'new') {
+      if (id !== this.state.currentId) {
          this.setState({
-            isEditMode: true,
-            title: 'Update this post'
+            ...this.getInitState(),
+            currentId: id
          });
 
-         postsService.getPost(id).then(post => {
-            this.setState({post: post});
-         });
+         if (id !== '' && id !== 'new') {
+            this.setState({
+               isEditMode: true,
+               title: 'Update this post'
+            });
+   
+            postsService.getPost(id).then(post => {
+               this.setState({ post: post });
+            });
+         }
+
+         console.log('Id', id)
       }
-      
-    }
+   }
+
+   componentDidMount() {
+      console.log('componentDidMount');
+
+      this.getPost();
+   }
+
+   componentDidUpdate() {
+      console.log('componentDidUpdate');
+      this.getPost();
+   }
 
    onSavePost(post) {
       postsService.savePost(post, this.state.isEditMode).then(res => {
          console.log('saved post');
-     });
+      });
    }
 
    render() {

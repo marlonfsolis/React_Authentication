@@ -20,7 +20,8 @@ function App() {
                <Col>
                   <Switch>
                      <Route path="/home" component={Home} />
-                     <Route path="/posts/:id" component={PostDetail} />
+                     <Route path="/posts/new"  component={PostDetail} />
+                     <Route path="/posts/detail/:id"  component={PostDetail} />
                      <Route path="/posts" component={Posts} />
                      <Redirect from="/" to="/home"></Redirect>
                   </Switch>

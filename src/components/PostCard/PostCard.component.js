@@ -5,7 +5,7 @@ import { withRouter } from "react-router";
 
 const PostCard = (props) => {
    const viewCarDetails = () => {
-      props.history.push(`/posts/${props.id}`);
+      props.history.push(`/posts/detail/${props.id}`);
    };
 
    return (

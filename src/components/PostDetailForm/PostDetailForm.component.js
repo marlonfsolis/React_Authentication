@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 
 export default function PostDetailForm(props) {
+
+   console.log(props);
+
    const { register, handleSubmit, setValue } = useForm();
 
    const onAddPost = post => {
@@ -20,7 +23,7 @@ export default function PostDetailForm(props) {
                <Form.Label>Content</Form.Label>
                <Form.Control as="textarea" rows="3" placeholder="Post content." name="content" defaultValue={props.post.content} ref={register({ require: true })}></Form.Control>
             </Form.Group>
-            <Button type="submit">Add Post</Button>
+            <Button type="submit">Save Changes</Button>
          </Form>
       </div>
    );
