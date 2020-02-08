@@ -3,14 +3,13 @@ import { Row, Col } from "react-bootstrap";
 import "./PostDetail.page.css";
 import PostDetailForm from "../../../components/PostDetailForm/PostDetailForm.component";
 import * as postsService from '../../../services/Posts.service';
+import { Route } from "react-router";
 
 export default class PostDetail extends Component {
    constructor(props) {
       super(props);
-
       this.state = this.getInitState();
-
-      this.onAddPost = this.onSavePost.bind(this);
+      this.onSavePost = this.onSavePost.bind(this);
    }
 
    getInitState() {
@@ -43,25 +42,24 @@ export default class PostDetail extends Component {
                this.setState({ post: post });
             });
          }
-
-         console.log('Id', id)
       }
    }
 
    componentDidMount() {
-      console.log('componentDidMount');
-
       this.getPost();
    }
 
    componentDidUpdate() {
-      console.log('componentDidUpdate');
       this.getPost();
    }
 
    onSavePost(post) {
-      postsService.savePost(post, this.state.isEditMode).then(res => {
-         console.log('saved post');
+      postsService.savePost(post).then(res => {
+         if(res.status === 200) {
+            this.props.history.push('/posts');
+         } else {
+            console.log('Error occurre. Post not saved');
+         }
       });
    }
 
@@ -74,7 +72,7 @@ export default class PostDetail extends Component {
                   <div className="page-title">
                      <h2>{this.state.title}</h2>
                   </div>
-                  <PostDetailForm post={this.state.post} onSavePost={this.onAddPost}></PostDetailForm>
+                  <PostDetailForm post={this.state.post} onSavePost={this.onSavePost}></PostDetailForm>
                </Col>
                <Col md={3}></Col>
             </Row>

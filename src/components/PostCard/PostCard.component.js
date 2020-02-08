@@ -1,20 +1,28 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import "./PostCard.component.css";
 import { withRouter } from "react-router";
 
+import "./PostCard.component.css";
+import * as postsService from "../../services/Posts.service";
+
 const PostCard = (props) => {
-   const viewCarDetails = () => {
+   const viewCarDetailsHandler = () => {
       props.history.push(`/posts/detail/${props.id}`);
    };
 
+   const deletePostHandler = (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      postsService.deletePost(props.id);
+   }
+
    return (
       <React.Fragment>
-         <Card className="Post" onClick={viewCarDetails}>
+         <Card className="Post" onClick={viewCarDetailsHandler}>
             <Card.Body>
                <Card.Title>{props.title}</Card.Title>
                <Card.Text>{props.content}</Card.Text>
-               <Button variant="primary">Delete</Button>
+               <Button variant="primary" onClick={deletePostHandler}>Delete</Button>
             </Card.Body>
          </Card>
       </React.Fragment>

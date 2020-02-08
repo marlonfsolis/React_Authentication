@@ -3,18 +3,19 @@ import { useForm } from "react-hook-form";
 import { Form, Button } from "react-bootstrap";
 
 export default function PostDetailForm(props) {
+   const { register, handleSubmit } = useForm();
 
-   console.log(props);
-
-   const { register, handleSubmit, setValue } = useForm();
-
-   const onAddPost = post => {
-      props.onAddPost(post);
+   const onSavePost = post => {
+      console.log(post)
+      props.onSavePost(post);
    };
 
    return (
       <div>
-         <Form onSubmit={handleSubmit(onAddPost)}>
+         <Form onSubmit={handleSubmit(onSavePost)}>
+            <Form.Group>
+               <Form.Control hidden name="key" defaultValue={props.post.key} ref={register}></Form.Control>
+            </Form.Group>
             <Form.Group>
                <Form.Label>Title</Form.Label>
                <Form.Control type="text" placeholder="Title" name="title" defaultValue={props.post.title} ref={register({ require: true })}></Form.Control>

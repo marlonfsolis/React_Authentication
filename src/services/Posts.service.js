@@ -1,13 +1,23 @@
 import axios from "../axios-main";
 
-export const savePost = (post, isEditMode) => {
-   if (post.id && post.id > 0) {
+export const savePost = (post) => {
+   console.log(post.key)
+   if (post.key && post.key !== '') {
+      console.log('Updating post');
+
       return axios.put("posts.json", post).then(res => {
          console.log(res);
       });
    }
+
+   console.log('Creating post');
    return axios.post("posts.json", post).then(res => {
-      console.log(res);
+      if(res && res.status === 200) {
+         return {
+            post: res.data,
+            status: res.status
+         }
+      }
    });
 };
 
@@ -28,20 +38,23 @@ export const getPosts = () => {
 };
 
 export const getPost = postId => {
-   const options = {
-      params: {
-         orderBy: '"$key"',
-         equalTo: `"${postId}"`
-      }
-   };
-   return axios.get("posts.json", options).then(res => {
+   const url = ['posts/', postId, '/.json'].join('');
+   return axios.get(url).then(res => {
       if (res && res.data) {
-        const key = Object.keys(res.data)[0] 
         const post = {
-            key: key,
-            ...res.data[key]
+            key: postId,
+            ...res.data
          };
          return post;
+      }
+   });   
+};
+
+export const deletePost = postId => {
+   const url = ['posts/', postId, '/.json'].join('');
+   return axios.delete(url).then(res => {
+      if (res && res.data) {
+         console.log('Posts deleted');
       }
    });
 };
