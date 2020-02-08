@@ -15,6 +15,7 @@ export default class PostDetail extends Component {
    getInitState() {
       return {
          currentId: '',
+         loading: false,
          isEditMode: false,
          title: 'Create new Posts',
          post: {
