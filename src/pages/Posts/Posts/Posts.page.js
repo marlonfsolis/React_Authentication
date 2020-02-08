@@ -25,7 +25,6 @@ class Posts extends Component {
    }
 
    componentDidMount() {
-      console.log('componentDidMount')
       this.getPosts();
    }
 

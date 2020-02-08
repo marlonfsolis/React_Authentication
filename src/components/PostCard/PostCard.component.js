@@ -8,7 +8,7 @@ import "./PostCard.component.css";
 import * as postsService from "../../services/Posts.service";
 
 const PostCard = props => {
-   const loading = useState(false);
+   const [loading, setLoading] = useState(false);
    const dispatch = useDispatch();
 
    const viewCarDetailsHandler = () => {
@@ -18,6 +18,7 @@ const PostCard = props => {
    const deletePostHandler = event => {
       event.preventDefault();
       event.stopPropagation();
+      setLoading(true);
       postsService.deletePost(props.id).then(res => {
          if (res && res.status === 200) {
             dispatch(deletePost(props.id));
@@ -40,7 +41,7 @@ const PostCard = props => {
             <Card.Body>
                <Card.Title>{props.title}</Card.Title>
                <Card.Text>{props.content}</Card.Text>
-               <Button variant="primary" onClick={deletePostHandler}>
+               <Button variant="primary" onClick={deletePostHandler.bind(this)}>
                   {getSpinnerElem()}
                   Delete
                </Button>
