@@ -54,7 +54,7 @@ export default class PostDetail extends Component {
    }
 
    onSavePost(post) {
-      postsService.savePost(post).then(res => {
+      postsService.savePost(this.state.currentId, post).then(res => {
          if(res.status === 200) {
             this.props.history.push('/posts');
          } else {

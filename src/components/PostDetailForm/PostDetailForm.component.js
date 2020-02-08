@@ -14,9 +14,6 @@ export default function PostDetailForm(props) {
       <div>
          <Form onSubmit={handleSubmit(onSavePost)}>
             <Form.Group>
-               <Form.Control hidden name="key" defaultValue={props.post.key} ref={register}></Form.Control>
-            </Form.Group>
-            <Form.Group>
                <Form.Label>Title</Form.Label>
                <Form.Control type="text" placeholder="Title" name="title" defaultValue={props.post.title} ref={register({ require: true })}></Form.Control>
             </Form.Group>

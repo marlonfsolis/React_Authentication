@@ -1,12 +1,17 @@
 import axios from "../axios-main";
 
-export const savePost = (post) => {
-   console.log(post.key)
-   if (post.key && post.key !== '') {
+export const savePost = (key, post) => {
+   console.log('Key', key)
+   if (key && key !== '') {
       console.log('Updating post');
-
-      return axios.put("posts.json", post).then(res => {
+      const data = {};
+      data[key] = post;
+      return axios.put("posts.json", data).then(res => {
          console.log(res);
+         return {
+            post: res.data,
+            status: res.status
+         }
       });
    }
 
@@ -51,10 +56,15 @@ export const getPost = postId => {
 };
 
 export const deletePost = postId => {
-   const url = ['posts/', postId, '/.json'].join('');
+   const url = ['posts/', postId, '.json'].join('');
    return axios.delete(url).then(res => {
-      if (res && res.data) {
-         console.log('Posts deleted');
+      if (res && res.status === 200) {
+         return res;
+      } else {
+         console.log('Error ocurre!');
+         return {
+            error: true
+         }
       }
    });
 };

@@ -16,9 +16,6 @@ class Posts extends Component {
 
    constructor(props) {
       super(props);
-      // this.state = {
-      //    componentUpdating: false
-      // };
    }
 
    getPosts() {
@@ -29,16 +26,10 @@ class Posts extends Component {
 
    componentDidMount() {
       console.log('componentDidMount')
-      // this.setState({ componentUpdating: true });
       this.getPosts();
    }
 
    componentDidUpdate() {
-      console.log('componentDidUpdate')
-      // if (this.state.componentUpdating === true) {
-      //    this.setState({ componentUpdating: false });
-      //    this.getPosts();
-      // }
    }
 
    getPostCards() {
