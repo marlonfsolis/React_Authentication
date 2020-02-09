@@ -3,7 +3,6 @@ import { Row, Col } from "react-bootstrap";
 import "./PostDetail.page.css";
 import PostDetailForm from "../../../components/PostDetailForm/PostDetailForm.component";
 import * as postsService from '../../../services/Posts.service';
-import { Route } from "react-router";
 
 export default class PostDetail extends Component {
    constructor(props) {

@@ -1,13 +1,10 @@
 import axios from "../axios-main";
 
 export const savePost = (key, post) => {
-   console.log('Key', key)
    if (key && key !== '') {
-      console.log('Updating post');
       const data = {};
       data[key] = post;
       return axios.put("posts.json", data).then(res => {
-         console.log(res);
          return {
             post: res.data,
             status: res.status
@@ -15,7 +12,6 @@ export const savePost = (key, post) => {
       });
    }
 
-   console.log('Creating post');
    return axios.post("posts.json", post).then(res => {
       if(res && res.status === 200) {
          return {
