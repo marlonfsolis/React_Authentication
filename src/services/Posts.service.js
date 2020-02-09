@@ -1,10 +1,11 @@
 import axios from "../axios-main";
 
 export const savePost = (key, post) => {
+   // update one post
    if (key && key !== '') {
       const data = {};
       data[key] = post;
-      return axios.put("posts.json", data).then(res => {
+      return axios.patch("posts.json", data).then(res => {
          return {
             post: res.data,
             status: res.status
@@ -12,6 +13,7 @@ export const savePost = (key, post) => {
       });
    }
 
+   // create new post 
    return axios.post("posts.json", post).then(res => {
       if(res && res.status === 200) {
          return {
